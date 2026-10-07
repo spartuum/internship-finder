@@ -3,6 +3,16 @@ import requests
 from opportunity import Opportunity
 from bs4 import BeautifulSoup
 
+API_URL = "https://jobicy.com/api/v2/remote-jobs"
+
+
+def fetch_jobs():
+    response = requests.get(API_URL, timeout=30)
+
+    response.raise_for_status()
+
+    return response.json()["jobs"]
+
 
 def create_opportunity(
     company,
@@ -99,3 +109,27 @@ def is_internship(job):
         return True
 
     return False
+
+def collect_internships():
+    jobs = fetch_jobs()
+    opportunities = []
+
+    for job in jobs:
+        if is_internship(job):
+            opportunities.append(job_to_opportunity(job))
+
+    return opportunities
+
+from functions import add_internship
+
+
+def save_opportunities(opportunities):
+    for opportunity in opportunities:
+        add_internship(
+            company=opportunity.company,
+            role=opportunity.role,
+            location=opportunity.location,
+            url=opportunity.url,
+            deadline=opportunity.deadline,
+            skills=opportunity.skills
+        )

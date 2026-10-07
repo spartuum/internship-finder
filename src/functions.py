@@ -16,6 +16,13 @@ def add_internship(
     notes=None
 ):
     db = SessionLocal()
+    existing = db.query(Internship).filter(
+        Internship.url == url
+    ).first()
+
+    if existing:
+        db.close()
+        return existing
 
     internship = Internship(
         company=company,
