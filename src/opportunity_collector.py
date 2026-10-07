@@ -2,6 +2,7 @@ import requests
 
 from opportunity import Opportunity
 from bs4 import BeautifulSoup
+import re
 
 API_URL = "https://jobicy.com/api/v2/remote-jobs"
 
@@ -100,13 +101,13 @@ def job_to_opportunity(job):
 
 def is_internship(job):
     job_title = job["jobTitle"].lower()
-    job_type = [job_type.lower() for job_type in job["jobType"]]
 
-    if "intern" in job_title:
+    if re.search(r"\bintern(ship)?\b", job_title):
         return True
 
-    if "internship" in job_type:
-        return True
+    for job_type in job["jobType"]:
+        if job_type.lower() == "internship":
+            return True
 
     return False
 
