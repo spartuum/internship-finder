@@ -14,6 +14,10 @@ def fetch_jobs():
 
     return response.json()["jobs"]
 
+def clean_description(description):
+    soup = BeautifulSoup(description, "html.parser")
+    return soup.get_text(" ", strip=True)
+
 
 def create_opportunity(
     company,
@@ -97,7 +101,7 @@ def job_to_opportunity(job):
         location=job["jobGeo"],
         url=job["url"],
         skills=None,
-        description=job["jobDescription"]
+        description=clean_description(job["jobDescription"])
     )
 
 def is_internship(job):

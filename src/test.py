@@ -13,7 +13,4 @@ internships = get_internships()
 print("\nDatabase records:", len(internships))
 
 for internship in internships:
-    print("\nID:", internship.id)
-    print("Company:", internship.company)
-    print("Role:", internship.role)
-    print("Description saved:", bool(internship.description))
+    print(internship.id, internship.company, internship.role)
