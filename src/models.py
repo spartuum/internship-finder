@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, Date
+from sqlalchemy import Column, Integer, String, Text, Date, DateTime
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
@@ -18,6 +18,11 @@ class Internship(Base):
 
     skills = Column(Text)
     description = Column(Text)
+
+    industry = Column(String(100))
+    level = Column(String(100))
+    job_type = Column(Text)
+    published_at = Column(DateTime)
 
     status = Column(String(50), default="Not Applied")
 

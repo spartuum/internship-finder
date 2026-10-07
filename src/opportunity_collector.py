@@ -1,5 +1,5 @@
 import requests
-
+from datetime import datetime
 from opportunity import Opportunity
 from bs4 import BeautifulSoup
 import re
@@ -101,7 +101,11 @@ def job_to_opportunity(job):
         location=job["jobGeo"],
         url=job["url"],
         skills=None,
-        description=clean_description(job["jobDescription"])
+        description=clean_description(job["jobDescription"]),
+        industry=", ".join(job["jobIndustry"]),
+        level=job["jobLevel"],
+        job_type=", ".join(job["jobType"]),
+        published_at=datetime.fromisoformat(job["pubDate"])
     )
 
 def is_internship(job):
@@ -137,6 +141,10 @@ def save_opportunities(opportunities):
             location=opportunity.location,
             url=opportunity.url,
             description=opportunity.description,
+            industry=opportunity.industry,
+            level=opportunity.level,
+            job_type=opportunity.job_type,
+            published_at=opportunity.published_at,
             deadline=opportunity.deadline,
             skills=opportunity.skills
         )
