@@ -10,3 +10,4 @@ class Opportunity:
     url: str
     deadline: date | None = None
     skills: str | None = None
+    description: str | None = None

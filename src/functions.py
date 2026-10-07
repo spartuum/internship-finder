@@ -11,6 +11,7 @@ def add_internship(
     url,
     deadline=None,
     skills=None,
+    description=None,
     status="Not Applied",
     resume_used=None,
     notes=None
@@ -31,6 +32,7 @@ def add_internship(
         url=url,
         deadline=deadline,
         skills=skills,
+        description=description,
         status=status,
         date_found=date.today(),
         resume_used=resume_used,

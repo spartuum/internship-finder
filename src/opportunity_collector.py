@@ -96,7 +96,8 @@ def job_to_opportunity(job):
         role=job["jobTitle"],
         location=job["jobGeo"],
         url=job["url"],
-        skills=None
+        skills=None,
+        description=job["jobDescription"]
     )
 
 def is_internship(job):
@@ -131,6 +132,7 @@ def save_opportunities(opportunities):
             role=opportunity.role,
             location=opportunity.location,
             url=opportunity.url,
+            description=opportunity.description,
             deadline=opportunity.deadline,
             skills=opportunity.skills
         )

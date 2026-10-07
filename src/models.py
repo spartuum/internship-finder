@@ -17,6 +17,7 @@ class Internship(Base):
     deadline = Column(Date)
 
     skills = Column(Text)
+    description = Column(Text)
 
     status = Column(String(50), default="Not Applied")
 
